@@ -1,0 +1,11 @@
+.sonarlint
+.env
+*.pyo
+*.pyc
+__pycache__/
+__pytest_cache__/
+*.py[cod]
+.DS_Store
+**/.DS_Store
+*.log
+env
