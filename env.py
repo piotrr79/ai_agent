@@ -1,8 +1,8 @@
 import sys
 import os
+from decouple import config
 # Tell syspath where to import modules from other folders in root direcotry
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from decouple import config
 
 class EnvReader():
     """ Get runtime params from env """

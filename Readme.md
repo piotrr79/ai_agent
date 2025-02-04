@@ -13,3 +13,7 @@ https://platform.openai.com/docs/api-reference/debugging-requests
 
 ### OpenAI creds:
 https://platform.openai.com/settings/organization/general
+
+### Run by:
+```python3 email_generator.py```
+```python3 connector.py```
