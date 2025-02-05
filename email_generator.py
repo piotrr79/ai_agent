@@ -18,7 +18,7 @@ class EmailGenerator:
         response = EmailGenerator.generate_template(self)
         response.update({"Body" : ' '.join([str(item) for item in gtp_response]) })
         
-        return json.dumps(response)
+        return json.dumps(response, indent = 1)
 
     def generate_template(self):
         """ Generate email template
