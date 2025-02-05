@@ -17,3 +17,13 @@ https://platform.openai.com/settings/organization/general
 ### Run by:
 ```python3 email_generator.py```
 ```python3 connector.py```
+
+### Run Django:
+From ai_agent_email_template directory run: ```python3 manage.py runserver```
+
+### Database:
+```python3 manage.py makemigrations members```
+```python3 manage.py migrate```
+
+### Superuser:
+```python3 manage.py createsuperuser```

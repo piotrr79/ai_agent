@@ -15,17 +15,36 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import os
+from decouple import config
+
+if os.environ.get('SECRET_KEY') is not None:   
+    secretKey = os.environ['SECRET_KEY']
+    dbName = os.environ['DB_NAME']
+    dbUser = os.environ['DB_USER']
+    dbPassword = os.environ['DB_PASSWORD']
+    openApiKey = os.environ['OPENAI_API_KEY']
+    openApiOrganisation = os.environ['OPENAI_ORGANIZATION']
+    openApiProjectId = os.environ['PROJECT_ID']
+else:
+    secretKey = config('SECRET_KEY')
+    dbName = config('DB_NAME')
+    dbUser = config('DB_USER')
+    dbPassword = config('DB_PASSWORD')
+    openApiKey = config('OPENAI_API_KEY')
+    openApiOrganisation = config('OPENAI_ORGANIZATION')
+    openApiProjectId = config('PROJECT_ID')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-cq0u8(#*1e^0twwmw3!xnn31)%-^!#$j+jm@u(qi61=^@!@51i'
+SECRET_KEY = secretKey
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -37,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'template_agent'
 ]
 
 MIDDLEWARE = [
@@ -77,7 +97,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'default_mysql': {
+        'ENGINE': 'django.db.backends.mysql',
+		'NAME': dbName,
+        'USER': dbUser,
+        'PASSWORD': dbPassword,
+        'HOST': '',
+        'PORT': '',
     }
+
 }
 
 
