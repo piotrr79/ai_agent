@@ -7,14 +7,13 @@ class Connector:
     def __init__(self):
         self
     
-    def call_gpt(self):
+    def call_gpt(self, prompt):
         """ Call GPT
 
             Returns:
                 String
-
-            @ToDo - Pass user input along file with data to GPT to generate summary for email content
-            @ToDo - Log request Id. message, file, etc for asynchronous processing (if needed)
+                
+            @ToDo - Log request Id. message, file, etc, e.g. for asynchronous processing (if needed)
         """
         response = []
 
@@ -26,7 +25,7 @@ class Connector:
 
         stream = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": "Say this is a test"}], # @ToDo - Email Template generation content
+        messages=[{"role": "user", "content": prompt}], # @ToDo - Email Template generation content
         stream=True)
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:

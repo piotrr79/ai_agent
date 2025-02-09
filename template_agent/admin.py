@@ -1,15 +1,15 @@
 from django.contrib import admin
 from django import forms
 from .models import PromptCategory, PromptRequest, PromptResponse, Template
+from template_agent.templates_generator.connector import Connector
 from template_agent.templates_generator.email_generator import EmailGenerator
-import inspect
 
 class PromptRequestForm(forms.ModelForm):
 
     class Meta:
         model = PromptRequest
         exclude = ['processed']
-        fields = ('category', 'prompt' , 'file', 'created_by')
+        fields = ('category', 'prompt' , 'file', 'created_by', 'title', 'name', 'surname', 'to', 'cc', 'signature')
 
     def __init__(self, *args, **kwargs):
         super(PromptRequestForm, self).__init__(*args, **kwargs)
@@ -35,13 +35,21 @@ class PromptRequestAdmin(admin.ModelAdmin):
 
     @admin.action(description='Generate templates for selected request')
     def call_ai(self, request, queryset):
-        selected = queryset.values_list("pk", flat=True)
-        # @ToDo - get selected records obj ids and prompts, and pass them to AI and model save
-        for pk in selected:
-            prompt_request_id = request.resolver_match.kwargs['prompt_request']
-            ai_responsne = EmailGenerator.generate_email_content(self)
-            prompt_response = PromptResponse(prompt_request=prompt_request_id, response= ai_responsne)
-            prompt_response.save()
+        selected = queryset.values_list('pk', flat=True)
+        # @ToDo - improve db performance by moveing query out of loop
+        for item in selected:
+            prompt_object = PromptRequest.objects.get(pk=item)
+            if prompt_object.processed == False:
+                prompt_object = PromptRequest.objects.get(pk=item)
+                ai_responsne = Connector.call_gpt(self, prompt_object.prompt)
+                email_template = EmailGenerator.generate_email_template(self, ai_responsne, prompt_object.title, prompt_object.name, prompt_object.surname, prompt_object.to, prompt_object.cc, prompt_object.signature)
+                prompt_response = PromptResponse(prompt_request=prompt_object, response=EmailGenerator.stringify_ai_response(self, ai_responsne))
+                prompt_response.save()
+                template_object = Template(prompt_request=prompt_object, template=email_template)
+                template_object.save()
+                prompt_object.processed = True
+                prompt_object.save()
+                
 
 class PromptResponseAdmin(admin.ModelAdmin):
     readonly_fields=('prompt_request', 'response')

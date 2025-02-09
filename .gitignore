@@ -8,4 +8,5 @@ __pytest_cache__/
 .DS_Store
 **/.DS_Store
 *.log
+*.sqlite3
 env
