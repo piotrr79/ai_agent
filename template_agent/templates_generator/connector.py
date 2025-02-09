@@ -1,5 +1,5 @@
+from django.conf import settings
 from openai import OpenAI
-from env import EnvReader
 
 class Connector:
     """ Connector class """
@@ -19,11 +19,11 @@ class Connector:
         response = []
 
         client = OpenAI(
-        organization=EnvReader.get_api_organisation(self),
-        project=EnvReader.get_project_id(self),
-        api_key=EnvReader.get_api_key(self)
+        organization=settings.OPENAI_ORGANIZATION,
+        project=settings.PROJECT_ID,
+        api_key=settings.OPENAI_API_KEY
         )
-        
+
         stream = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": "Say this is a test"}], # @ToDo - Email Template generation content
@@ -36,5 +36,5 @@ class Connector:
 
         return response
 
-x = Connector.call_gpt(Connector)
+# x = Connector.call_gpt(Connector)
 # print(x)

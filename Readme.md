@@ -22,7 +22,7 @@ https://platform.openai.com/settings/organization/general
 From ai_agent_email_template directory run: ```python3 manage.py runserver```
 
 ### Database:
-```python3 manage.py makemigrations members```
+```python3 manage.py makemigrations template_agent```
 ```python3 manage.py migrate```
 
 ### Superuser:

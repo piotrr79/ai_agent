@@ -1,6 +1,6 @@
 ## Generate email wtemplate ith email library or just as html
 import json
-from connector import Connector
+from .connector import Connector
 
 class EmailGenerator:
     """ EmailGenerator class """
@@ -36,5 +36,5 @@ class EmailGenerator:
 
         return response
     
-x = EmailGenerator.generate_email_content(EmailGenerator)
-print(x)
+# x = EmailGenerator.generate_email_content(EmailGenerator)
+# print(x)

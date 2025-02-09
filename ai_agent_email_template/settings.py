@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 from decouple import config
 
+# Read settigns from env or from file
 if os.environ.get('SECRET_KEY') is not None:   
     secretKey = os.environ['SECRET_KEY']
     dbName = os.environ['DB_NAME']
@@ -109,6 +110,10 @@ DATABASES = {
 
 }
 
+# OpenAI credentials
+OPENAI_API_KEY = openApiKey
+OPENAI_ORGANIZATION = openApiOrganisation
+PROJECT_ID = openApiProjectId
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

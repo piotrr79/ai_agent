@@ -17,7 +17,7 @@ class PromptRequest(models.Model):
     
     category = models.ForeignKey('PromptCategory', on_delete=models.CASCADE)
     prompt = models.TextField()
-    file = models.FileField(upload_to = user_directory_path) 
+    file = models.FileField(upload_to = user_directory_path, blank=True, null=True) 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     processed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -52,7 +52,7 @@ class Template(models.Model):
     
     prompt_request = models.ForeignKey('PromptRequest', on_delete=models.CASCADE)
     template = models.TextField()
-    file = models.FileField(upload_to = user_directory_path) 
+    file = models.FileField(upload_to = user_directory_path, blank=True, null=True) 
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
