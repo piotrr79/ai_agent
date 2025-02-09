@@ -26,6 +26,18 @@ class PromptResponseForm(forms.ModelForm):
         self.fields['prompt_request'].widget.attrs['readonly'] = True
         self.fields['response'].widget.attrs['readonly'] = True
 
+
+class TemplateForm(forms.ModelForm):
+
+    class Meta:
+        model = Template
+        fields = ('prompt_request', 'template')
+
+    #def __init__(self, *args, **kwargs):
+    #    super(TemplateForm, self).__init__(*args, **kwargs)
+    #    self.fields['prompt_request'].widget.attrs['readonly'] = True
+    #    self.fields['template'].widget.attrs['readonly'] = True
+
 #class PromptCategory(admin.ModelAdmin):
 #    pass
 
@@ -36,7 +48,7 @@ class PromptRequestAdmin(admin.ModelAdmin):
     @admin.action(description='Generate templates for selected request')
     def call_ai(self, request, queryset):
         selected = queryset.values_list('pk', flat=True)
-        # @ToDo - improve db performance by moveing query out of loop
+        # @ToDo - improve db performance by moving query out of the loop
         for item in selected:
             prompt_object = PromptRequest.objects.get(pk=item)
             if prompt_object.processed == False:
@@ -54,10 +66,10 @@ class PromptRequestAdmin(admin.ModelAdmin):
 class PromptResponseAdmin(admin.ModelAdmin):
     readonly_fields=('prompt_request', 'response')
 
-#class Template(admin.ModelAdmin):
-#    pass
+class TemplateAdmin(admin.ModelAdmin):
+    readonly_fields=('prompt_request', 'template')
 
 admin.site.register(PromptCategory)
 admin.site.register(PromptRequest, PromptRequestAdmin)
 admin.site.register(PromptResponse, PromptResponseAdmin)
-admin.site.register(Template)
+admin.site.register(Template, TemplateAdmin)
