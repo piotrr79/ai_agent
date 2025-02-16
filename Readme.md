@@ -27,12 +27,20 @@ ChatGPT responses will be saved to `Prompt Response`, generated email tmeplates 
 
 ### Instructions:
 
+All below commands are for MacOS, for Linux rather `python` should be used instead of `python3` to call Python from command line
+
 Install Python3
 
 Generate OpenAI creds:
 https://platform.openai.com/settings/organization/general
 
-Clone and run `pip3 install -r requirements.txt` from project directory
+Clone git repository
+
+From project directory create vrtual env with `python3 -m venv aiagentenv`
+
+Start virtual env by running `source aiagentenv/bin/activate`
+
+Run `pip3 install -r requirements.txt` from project directory, if necessary install additional system packages (like Rust on MacOs, etc)
 
 Rename file `env.sample` to `.env` and provide credentials there, databse credentails section can be skipped if SqLite local db will be used
 
@@ -49,6 +57,14 @@ Create superuser to access admin panel:
 Finally run server:
 
 ```python3 manage.py runserver```
+
+### Run Docker file:
+
+Generate image from project directory with `docker build -t ai_agent-1.0 .`
+
+Crate file with env vars
+
+Run image with environment variable from file `docker run -p 8080:80 --env-file .env ai_agent-1.0`
 
 
 ### Additional links:
