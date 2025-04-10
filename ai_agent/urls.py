@@ -1,5 +1,5 @@
 """
-URL configuration for ai_agent_email_template project.
+URL configuration for ai_agent project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -18,6 +18,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('', include('template_agent.urls')),
-    path('admin/', admin.site.urls),
+    path('', include('summarizer.urls')),
+    path('panel/', admin.site.urls),
 ]

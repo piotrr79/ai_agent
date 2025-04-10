@@ -1,6 +1,6 @@
-### Python email template agent to generate templates with AI from user inputs
+### Python ai agent to sumarize text with AI from user inputs
 
-Application sends to OpenAI user prompt, gets response and generate personalized email template
+Application sends to OpenAI user prompt and gets response
 
 For data privacy only prompt is send to ChatGPT, other details like contacts are stored locally
 
@@ -14,15 +14,13 @@ Log in to admin UI, select `Prompt Request` and click `Add Prompt Request`
 
 ![Main](MainPage.png)
 
-When completed form list of prompt request select those which should be send to ChatGPT by checking checkboxes and selecting from the `Action` list `Generate templates for selected request` and clicking on button `Go`
+When completed form list of prompt request select those which should be send to ChatGPT by checking checkboxes and selecting from the `Action` list `Send prompts to AI for selected request` and clicking on button `Go`
 
 ![SendingPrompt](SendingPrompt.png)
 
-ChatGPT responses will be saved to `Prompt Response`, generated email tmeplates in JSON format will be saved to `Templates`
+ChatGPT responses will be saved to `Prompt Response`
 
 ![PromptResponse](PromptResponse.png)
-
-![Template](Template.png)
 
 
 ### Instructions:
@@ -46,7 +44,7 @@ Rename file `env.sample` to `.env` and provide credentials there, databse creden
 
 Generate database by running migrations:
 
-```python3 manage.py makemigrations template_agent```
+```python3 manage.py makemigrations summarizer```
 
 ```python3 manage.py migrate```
 

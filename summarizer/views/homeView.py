@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 
-class TemplateHomeView:
+class HomeView:
     """
     Home url welcome message
     """
@@ -10,4 +10,4 @@ class TemplateHomeView:
         pass
 
     def home(request):
-        return HttpResponse("Welcome on AI Agent for email templates. Please go to /admin to log in")
+        return HttpResponse("Welcome on AI Agent. Please go to /panel to log in")

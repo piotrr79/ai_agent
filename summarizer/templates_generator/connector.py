@@ -25,7 +25,7 @@ class Connector:
 
         stream = client.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}], # @ToDo - Email Template generation content
+        messages=[{"role": "user", "content": prompt}], 
         stream=True)
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:

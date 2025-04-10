@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('template_agent', '0003_promptrequest_cc_promptrequest_signature_and_more'),
+        ('summarizer', '0003_promptrequest_cc_promptrequest_signature_and_more'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='promptrequest',
+            model_name='promptinternalrequest',
             name='name',
             field=models.CharField(blank=True, max_length=255, null=True),
         ),

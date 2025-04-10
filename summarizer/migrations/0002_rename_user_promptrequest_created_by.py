@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('template_agent', '0001_initial'),
+        ('summarizer', '0001_initial'),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='promptrequest',
+            model_name='promptinternalrequest',
             old_name='user',
             new_name='created_by',
         ),
