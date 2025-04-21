@@ -1,9 +1,5 @@
-from django.conf import settings
-import os
+from pathlib import Path
 from ctransformers import AutoModelForCausalLM
-# from transformers import AutoTokenizer, AutoModelForCausalLM
-# import torch
-
 
 class Validator:
     """ Connector class """
@@ -21,44 +17,26 @@ class Validator:
         """
 
         response = []
-
-        # model_name = 'llama-2-7b-chat.ggmlv3.q4_K_S.bin'
-        # model_name = '/Volumes/Personal/Python/ai_agent/summarizer/ai_model/llama-2-7b-chat.ggmlv3.q4_K_S.bin'
-        # tokenizer = AutoTokenizer.from_pretrained(model_name)
-        # model = AutoModelForCausalLM.from_pretrained(model_name, device_map='auto')
-
-        #llm = AutoModelForCausalLM.from_pretrained('llama-2-7b-chat.ggmlv3.q4_K_S.bin',  model_type='llama')
-        #print(llm("AI is going to"))
-
-        # inputs = tokenizer(prompt, return_tensors='pt')
-        # Generate text
-        ''' outputs = model.generate(
-            inputs['input_ids'].to('cuda'),  # Send input to GPU if available
-            max_length=100,  # Maximum length of the output
-            num_return_sequences=1,  # Number of responses
-            temperature=0.7,  # Adjust creativity level
-            top_p=0.9,  # Nucleus sampling
-        ) '''
-        # Decode and print the output
-        # generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        # print(generated_text)
-
-
+        
+        app_dir = Path(__file__).resolve().parent.parent.parent.parent
 
         llm = AutoModelForCausalLM.from_pretrained(
-            model_path_or_repo_id = '/Volumes/Personal/Python/ai_agent/summarizer/libs/',  
+            model_path_or_repo_id = str(app_dir) + '/ai_agent/summarizer/libs/', 
             model_type = 'llama', 
             model_file = 'llama-2-7b-chat.ggmlv3.q4_K_S.bin',
             local_files_only = True)
         
-        print(llm('What are the planets in Solar System'))
+        output = llm(prompt, max_new_tokens=60, temperature=0.5)
+
+        # output.replace("?\n ", "")
+        # output.replace("\n\n", "")
+        
+        response.append(output.replace("?\n ", ""))      
 
         return response
 
-# x = Validator.call_llama(Validator)
-# print(x)
-
-prompt = 'What are the planets in Solar System'
+# prompt = 'How many planets are in Solar System'
+prompt = 'Does the text attached contains sensitive data, even fictional. Please answer with Yes or No: Jessica Thompson, born on July 14, 1982, is a marketing analyst living at 4827 Willow Creek Dr, Apt 3B, Springfield, IL 62704. She works for BluePeak Strategies Inc. and can be reached at (217) 555-9321 or via email at jessica.thompson82@examplemail.com. Her online credentials include the username "jthompson82" and the password "PurpleSunset!92" (for demo purposes only). Jessica holds a dummy credit card number 4111 1111 1111 1111, with an expiration date of 09/26 and CVV 321. Her fictional social security number is 123-45-6789. Outside of work, she enjoys baking, running, and collecting vintage postcards, and shares her home with her golden retriever, Milo.'
 x = Validator.call_llama(Validator, prompt)
 print(x)
 
