@@ -7,6 +7,7 @@ class PromptRequest(models.Model):
         # file will be uploaded to MEDIA_ROOT / user_<id>/<filename> 
         return 'user_{0}/{1}'.format(instance.user.id, filename) 
     
+    title = models.CharField(max_length=255, default='')
     prompt = models.TextField()
     file = models.FileField(upload_to = user_directory_path, blank=True, null=True) 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)

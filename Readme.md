@@ -52,9 +52,13 @@ Create superuser to access admin panel:
 
 ```python3 manage.py createsuperuser```
 
+Download Llama SLM from `https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/tree/main` and place it in /libs
+
 Finally run server:
 
 ```python3 manage.py runserver```
+
+App is available under ```http://127.0.0.1:8000/panel/```
 
 ### Run Docker file:
 
