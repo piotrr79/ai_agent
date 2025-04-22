@@ -11,8 +11,6 @@ class PromptRequest(models.Model):
     prompt = models.TextField()
     file = models.FileField(upload_to = user_directory_path, blank=True, null=True) 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    internal = models.BooleanField(default=False)
-    external = models.BooleanField(default=False)
     processed_internally = models.BooleanField(default=False)
     accepted = models.BooleanField(default=False)
     processed_externally = models.BooleanField(default=False)
@@ -25,6 +23,8 @@ class PromptRequest(models.Model):
 class PromptResponse(models.Model):
     prompt_request = models.ForeignKey('PromptRequest', on_delete=models.CASCADE)
     response = models.TextField()
+    internal = models.BooleanField(default=False)
+    external = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
