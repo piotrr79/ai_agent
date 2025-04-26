@@ -1,6 +1,6 @@
-### Python ai agent to sumarize text with AI from user inputs
+### Python ai agent to summarize text with AI from user inputs
 
-This is POCof  application for sumarizing text with AI. App utilize locally deployed SLM / LLM (currently Llama) and external OpenAI. Can be used for testing varoius SLM / LLM models run on locally on CPU. 
+This is POC of application for summarizing text with AI. App utilize locally deployed SLM / LLM (currently Llama) and external OpenAI. Can be used for testing varoius SLM / LLM models run on locally on CPU. 
 
 In first step application analyze provided text against sensitive data. Then it let user to summarize text wil local model. And then, if results are not satisfactory, prompt can be send to OpenAI.
 
