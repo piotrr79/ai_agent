@@ -5,15 +5,15 @@ class Connector:
     """ Connector class """
 
     def __init__(self):
-        self
+        pass
     
-    def call_gpt(self, prompt):
+    def call_gpt(self, prompt: str) -> list:
         """ Call GPT
 
             Returns:
                 String
                 
-            @ToDo - Log request Id. message, file, etc, e.g. for asynchronous processing (if needed)
+            @ToDo - Consider to log request Id, message, file, etc
         """
         response = []
 
@@ -23,17 +23,13 @@ class Connector:
         api_key=settings.OPENAI_API_KEY
         )
 
+        # @ToDo - move model name and settings to configuration (db or .env) 
         stream = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}], 
         stream=True)
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:
-                # print(chunk.choices[0].delta.content, end="")
-                # print(chunk.choices[0].delta.content)
                 response.append(chunk.choices[0].delta.content)
 
         return response
-
-# x = Connector.call_gpt(Connector)
-# print(x)

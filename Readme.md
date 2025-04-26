@@ -1,26 +1,28 @@
 ### Python ai agent to sumarize text with AI from user inputs
 
-Application sends to OpenAI user prompt and gets response
+This POC application for sumarizing text with AI. App utilize locally deployed SLM / LLM (currently Llama) and external OpenAI. Can be used for testkng varoius SLM / LLM models running on localhost. In first step application analyze provided text against sensitive data. Then it let user to summarize text wil local model. And then if results are not satisfactory prompt can be send to OpenAI.
 
-For data privacy only prompt is send to ChatGPT, other details like contacts are stored locally
-
-Application use Django framework and Django Admin panels to let users provides their inputs (just for simplyfing UI development)
+Application use Django framework and Django Admin panels to let users provides their inputs (for simplyfing UI development). User level access can be defined with Django Groups.
 
 Before running locally please generate OpenAI crednetials as specified in `Instructions` section below
 
 ### Manuals:
 
-Log in to admin UI, select `Prompt Request` and click `Add Prompt Request`
+Log in to admin UI, select `Prompt Request`, click `Add Prompt Request` and provide data.
 
 ![Main](MainPage.png)
 
-When completed form list of prompt request select those which should be send to ChatGPT by checking checkboxes and selecting from the `Action` list `Send prompts to AI for selected request` and clicking on button `Go`
+When completed from list of prompt requests select those which should be validated with internal AI model, by checking checkboxes and selecting from the `Action` list `Validate request with local model` and clicking on button `Go`
 
 ![SendingPrompt](SendingPrompt.png)
 
-ChatGPT responses will be saved to `Prompt Response`
+Do the same with `Summarize text with local model` and `Summarize text with external model`
+
+All responses will be saved to `Prompt Response` (below internal model answer against question about sensitive data in prompt)
 
 ![PromptResponse](PromptResponse.png)
+
+Bear in mind that locally hosted models are vary, results depends on model and its configuration.
 
 
 ### Instructions:
@@ -54,13 +56,22 @@ Create superuser to access admin panel:
 
 Download Llama SLM from `https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/tree/main` and place it in /libs
 
+Other SLM / LLM from `https://huggingface.co` can be used as well
+
 Finally run server:
 
 ```python3 manage.py runserver```
 
 App is available under ```http://127.0.0.1:8000/panel/```
 
+### Unit tests:
+
+Run unit tests for internal slm / llm (to verify loaded model) by calling `python3 manage.py test summarizer.test.test_validator`
+
+All test can be run with `python3 manage.py test` (more tests in progress)
+
 ### Run Docker file:
+(still in progress)
 
 Generate image from project directory with `docker build -t ai_agent-1.0 .`
 

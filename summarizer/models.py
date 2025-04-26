@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django import forms
 class PromptRequest(models.Model):    
 
     def user_directory_path(self, instance, filename): 
@@ -19,6 +19,20 @@ class PromptRequest(models.Model):
     class Meta:
         ordering = ['-created']
         db_table = 'prompt_request'
+
+    is_cleaned = False
+    
+    def clean(self):
+        if self.processed_internally is False and self.accepted is True:
+            raise forms.ValidationError('Before accepting prompt must be processed internally')
+        else:
+            self.is_cleaned = True
+
+    def save(self, *args, **kwargs):
+        if not self.is_cleaned:
+            self.clean()
+
+        super().save(*args, **kwargs)
 
 class PromptResponse(models.Model):
     prompt_request = models.ForeignKey('PromptRequest', on_delete=models.CASCADE)
