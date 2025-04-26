@@ -1,10 +1,12 @@
 ### Python ai agent to sumarize text with AI from user inputs
 
-This POC application for sumarizing text with AI. App utilize locally deployed SLM / LLM (currently Llama) and external OpenAI. Can be used for testkng varoius SLM / LLM models running on localhost. In first step application analyze provided text against sensitive data. Then it let user to summarize text wil local model. And then if results are not satisfactory prompt can be send to OpenAI.
+This is POCof  application for sumarizing text with AI. App utilize locally deployed SLM / LLM (currently Llama) and external OpenAI. Can be used for testing varoius SLM / LLM models run on locally on CPU. 
+
+In first step application analyze provided text against sensitive data. Then it let user to summarize text wil local model. And then, if results are not satisfactory, prompt can be send to OpenAI.
 
 Application use Django framework and Django Admin panels to let users provides their inputs (for simplyfing UI development). User level access can be defined with Django Groups.
 
-Before running locally please generate OpenAI crednetials as specified in `Instructions` section below
+Before running locally please generate OpenAI crednetials and download any open source model like Llama, as specified in `Instructions` section below.
 
 ### Manuals:
 
@@ -54,7 +56,7 @@ Create superuser to access admin panel:
 
 ```python3 manage.py createsuperuser```
 
-Download Llama SLM from `https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/tree/main` and place it in /libs
+Download Llama SLM from `https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/tree/main` and place it in `summarizer/libs` folder (create one if does not exist)
 
 Other SLM / LLM from `https://huggingface.co` can be used as well
 

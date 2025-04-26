@@ -10,4 +10,4 @@ __pytest_cache__/
 *.log
 *.sqlite3
 env
-libs/
+libs/*
