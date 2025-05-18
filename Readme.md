@@ -58,7 +58,9 @@ Create superuser to access admin panel:
 
 Download Llama SLM from `https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML/tree/main` and place it in `summarizer/libs` folder (create one if does not exist)
 
-Other SLM / LLM from `https://huggingface.co` can be used as well
+Other SLM / LLM from `https://huggingface.co` can be used as well, for instance GPT2 was tested too: `https://huggingface.co/aisuko/gpt-2-1.5B-ggml/tree/main`
+
+Bear in mind that agent use ctransformers python library, so model used must support this library. Compatible model types can be checked at: `https://pypi.org/project/ctransformers/0.1.0/`
 
 Finally run server:
 

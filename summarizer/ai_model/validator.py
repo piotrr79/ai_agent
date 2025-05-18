@@ -25,6 +25,14 @@ class Validator:
             model_file = 'llama-2-7b-chat.ggmlv3.q4_K_S.bin',
             local_files_only = True)
         
+        '''Example usage of another model, gpt2 from https://huggingface.co/aisuko/gpt-2-1.5B-ggml/tree/main
+        llm = AutoModelForCausalLM.from_pretrained(
+            model_path_or_repo_id = str(app_dir) + '/ai_agent/summarizer/libs/', 
+            model_type = 'gpt2', 
+            model_file = 'ggml-model-f16.bin',
+            local_files_only = True)
+        '''
+        
         # @ToDo - move max_new_tokens and temperature to configuration (db or .env) 
         output = llm(prompt, max_new_tokens=tokens, temperature=temp)        
         #response.append(output.replace("?\n ", "").replace("\n\n", ""))      
